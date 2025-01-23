@@ -8,9 +8,9 @@ import { useDispatch } from 'react-redux'
 
 function Signup() {
   const navigate =useNavigate()
-  const [error,setError] = useState("")
   const dispatch = useDispatch()
-  const [register,handleSubmit]  =useForm()
+  const [register,handleSubmit] = useForm()
+  const [error,setError] = useState("")
 
   const create = async(data)=>{
     setError("")
@@ -18,7 +18,7 @@ function Signup() {
       const userData = await authService.createAccount(data)
       console.log(userData);
       if(userData){
-        const userData =await authService.getCurrentUser()
+        const userData = await authService.getCurrentUser()
         if(userData) dispatch(login(userData));
         navigate("/")
       }
