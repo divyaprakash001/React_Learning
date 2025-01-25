@@ -51,13 +51,13 @@ function App() {
     <>
      <div className="max-w-[400px] border border-sky-500  rounded-md text-white mx-auto mt-10">
       <h2 className="bg-slate-500 text-white text-center py-2">Password Generator</h2>
-      <div className="w-[100%] mx-auto mt-4 mb-2">
+      <div className="w-[100%] mx-auto mt-4 mb-2 flex justify-center">
       <input 
       type="text" 
       value={password} 
       placeholder="Password" 
       readOnly 
-      className="w-[70%] ms-8 rounded-l-md text-orange-500 ps-2" 
+      className="w-[70%]  rounded-l-md text-orange-500 ps-2" 
       ref={passwordRef}
       />
       <button 
