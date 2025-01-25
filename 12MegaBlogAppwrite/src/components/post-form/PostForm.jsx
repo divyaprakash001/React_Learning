@@ -16,7 +16,7 @@ function PostForm({post}) {
   })
 
   const navigate = useNavigate()
-  const userData = useSelector(state=> state.user.userData)
+  const userData = useSelector(state=> state.auth.userData)
 
   const submit = async(data)=>{
     if(post){
@@ -48,17 +48,19 @@ function PostForm({post}) {
     }
   }
 
-  const slugTransform = useCallback((value)=>{
-    if(value && typeof value === 'string')
+  const slugTransform = useCallback((value) => {
+    if (value && typeof value === 'string') {
+      // First, remove unwanted characters and spaces, then trim leading hyphen if any
       return value
-      .trim()
-      .toLowerCase()
-      .replace(/^[a-zA-Z\d\s]+/g,'-')
-      .replace(/\s/g,'-')
-    
-      return ''
-    
-  },[])
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-zA-Z\d\s]/g, '') // Remove any special characters except alphanumeric and spaces
+        .replace(/\s+/g, '-')  // Replace spaces with hyphens
+        .replace(/^-+/g, '')   // Remove leading hyphens if any
+    }
+    return '';
+  }, []);
+  
 
   useEffect(()=>{
     const subscription = watch((value,{name})=>{
@@ -126,6 +128,9 @@ function PostForm({post}) {
                 {...register("status",{
                   required:true })}
               />
+              <Button type="submit" bgColor={post ? "bg-green-500" : undefined} className="w-full">
+                    {post ? "Update" : "Submit"}
+                </Button>
         </div>
       </form>
     </>
